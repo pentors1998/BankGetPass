@@ -35,7 +35,7 @@ public class HistoryPageServlet extends HttpServlet {
         Account accountObj = (Account) session.getAttribute("account");
         if (accountObj == null) {
             request.setAttribute("message", "Please Login.");
-            getServletContext().getRequestDispatcher("/Login").forward(request, response);
+            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         }
         getServletContext().getRequestDispatcher("/HistoryServlet").forward(request, response);
     }

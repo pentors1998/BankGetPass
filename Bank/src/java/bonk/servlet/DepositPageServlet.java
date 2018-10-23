@@ -45,7 +45,7 @@ public class DepositPageServlet extends HttpServlet {
         Account accountObj = (Account) session.getAttribute("account");
         if (accountObj == null) {
             request.setAttribute("message", "Please Login.");
-            getServletContext().getRequestDispatcher("/Login").forward(request, response);
+            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         }
         getServletContext().getRequestDispatcher("/Deposit.jsp").forward(request, response);
     }
