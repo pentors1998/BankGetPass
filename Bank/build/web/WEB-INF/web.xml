@@ -2,35 +2,35 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>bonk.servlet.LoginServlet</servlet-class>
+        <servlet-class>bank.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>bonk.servlet.LogoutServlet</servlet-class>
+        <servlet-class>bank.servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DepositPageServlet</servlet-name>
-        <servlet-class>bonk.servlet.DepositPageServlet</servlet-class>
+        <servlet-class>bank.servlet.DepositPageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DepositServlet</servlet-name>
-        <servlet-class>bonk.servlet.DepositServlet</servlet-class>
+        <servlet-class>bank.servlet.DepositServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WithdrawPageServlet</servlet-name>
-        <servlet-class>bonk.servlet.WithdrawPageServlet</servlet-class>
+        <servlet-class>bank.servlet.WithdrawPageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WithdrawServlet</servlet-name>
-        <servlet-class>bonk.servlet.WithdrawServlet</servlet-class>
+        <servlet-class>bank.servlet.WithdrawServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HistoryPageServlet</servlet-name>
-        <servlet-class>bonk.servlet.HistoryPageServlet</servlet-class>
+        <servlet-class>bank.servlet.HistoryPageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HistoryServlet</servlet-name>
-        <servlet-class>bonk.servlet.HistoryServlet</servlet-class>
+        <servlet-class>bank.servlet.HistoryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bonk.servlet;
+package bank.servlet;
 
 import bank.jpa.model.Account;
+import bank.jpa.model.controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
@@ -22,7 +23,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Administrator
  */
-public class DepositPageServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "BankPU")
     EntityManagerFactory emf;
@@ -41,13 +42,24 @@ public class DepositPageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        Account accountObj = (Account) session.getAttribute("account");
-        if (accountObj == null) {
-            request.setAttribute("message", "Please Login.");
+        String idS = request.getParameter("id");
+        String pinS = request.getParameter("pin");
+        HttpSession session = request.getSession(true);
+        if (idS != null && idS.trim().length() > 0 && pinS != null && pinS.trim().length() > 0) {
+            int id = Integer.parseInt(idS);
+            AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
+            Account accountObj = accountJpaCtrl.findAccount(id);
+            if (accountObj != null) {
+                int pin = Integer.parseInt(pinS);
+                if (pin == accountObj.getPin()) {
+                    session.setAttribute("account", accountObj);
+                    getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response);
+                    return;
+                }
+            }
+            request.setAttribute("message", "Something wrong!");
             getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         }
-        getServletContext().getRequestDispatcher("/Deposit.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

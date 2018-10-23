@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bonk.servlet;
+package bank.servlet;
 
 import bank.jpa.model.Account;
 import java.io.IOException;

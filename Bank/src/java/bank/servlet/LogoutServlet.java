@@ -3,33 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bonk.servlet;
+package bank.servlet;
 
-import bank.jpa.model.Account;
-import bank.jpa.model.controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Administrator
  */
-public class LoginServlet extends HttpServlet {
-
-    @PersistenceUnit(unitName = "BankPU")
-    EntityManagerFactory emf;
-
-    @Resource
-    UserTransaction utx;
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,24 +30,11 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idS = request.getParameter("id");
-        String pinS = request.getParameter("pin");
-        HttpSession session = request.getSession(true);
-        if (idS != null && idS.trim().length() > 0 && pinS != null && pinS.trim().length() > 0) {
-            int id = Integer.parseInt(idS);
-            AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
-            Account accountObj = accountJpaCtrl.findAccount(id);
-            if (accountObj != null) {
-                int pin = Integer.parseInt(pinS);
-                if (pin == accountObj.getPin()) {
-                    session.setAttribute("account", accountObj);
-                    getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response);
-                    return;
-                }
-            }
-            request.setAttribute("message", "Something wrong!");
-            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
         }
+        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
